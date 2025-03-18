@@ -1,0 +1,3 @@
+[submodule "speedcrunch"]
+	path = speedcrunch
+	url = https://bitbucket.org/heldercorreia/speedcrunch.git
