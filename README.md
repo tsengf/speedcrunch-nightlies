@@ -4,7 +4,7 @@ Repository to build MacOS binaries from the official SpeedCrunch repository.
 Instructions taken from
 https://bitbucket.org/heldercorreia/speedcrunch/wiki/BuildingOSXPackage
 
-Please check the [Releases list](https://github.com/tsengf/speedcrunch-nightlies/releases) to download the latest builds.
+Please check the [Releases](https://github.com/tsengf/speedcrunch-nightlies/releases) to download the latest builds.
 
 # Building
 
@@ -15,15 +15,18 @@ SpeedCrunch depends on Qt. I was able to get only version 6.7.3 to successfully 
     tar xf qt-everywhere-src-6.7.3.tar.xz
     cd qt-everywhere-6.7.3
 
-Only build the submodules required by SpeedCrunch. Build static binaries to avoid QT dependencies at runtime.
+Run configure
+* Specify the installation path 'speedcrunch-nightlies/qt-static'
+* Build static binaries to avoid runtime dependencies to Qt
+* Build only the submodules required by SpeedCrunch
 
-    ./configure -static -prefix ../qt-static -submodules qtbase,qttools,qtdeclarative
+    ./configure -prefix -static ../qt-static -submodules qtbase,qttools,qtdeclarative
 
-Qt is now configured for building. Just run 'cmake --build . --parallel'
+Qt is now configured for building. Let's build Qt.
 
-    cmake --build . --parallel
+    cmake --build .
 
-Once everything is built, you must run 'cmake --install .'
+Install Qt to the installation path.
 
     cmake --install .
 
@@ -33,12 +36,14 @@ Qt will be installed into 'speedcrunch-nightlies/qt-static'
 
 Pull the SpeedCrunch source
 
+    cd ..
     git submodule init
     git submodule update
 
 Build SpeedCrunch
+* Point Cmake to Qt
 
-    cd ../build
+    cd build
     cmake -DCMAKE_PREFIX_PATH=`realpath ../qt-static/lib/cmake` ../speedcrunch/src
     make
 
@@ -46,4 +51,4 @@ Generate a SpeedCrunch package
 
     make package
 
-Your package will be found in 'speedcrunch-nightlies/SpeedCrunch.dmg'.
+Your package will be saved as 'speedcrunch-nightlies/SpeedCrunch.dmg'.
