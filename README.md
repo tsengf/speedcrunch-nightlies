@@ -6,7 +6,7 @@ https://bitbucket.org/heldercorreia/speedcrunch/wiki/BuildingOSXPackage
 
 Please check the [Releases](https://github.com/tsengf/speedcrunch-nightlies/releases) to download the latest builds.
 
-# Setup
+# Building
 
 ## Qt
 SpeedCrunch depends on Qt. I was able to get only version 6.7.3 to successfully build on the latest MacOS.
@@ -52,3 +52,11 @@ Generate a SpeedCrunch package.
         make package
 
 Your package will be saved as 'speedcrunch-nightlies/SpeedCrunch.dmg'.
+
+# Installation
+
+Install 'SpeedCrunch.dmg'.
+
+In a terminal, type
+
+        attr -c /Applications/SpeedCrunch.app
