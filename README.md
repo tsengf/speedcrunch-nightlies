@@ -1,8 +1,5 @@
 # speedcrunch-nightlies
-Repository to build MacOS binaries from the official SpeedCrunch repository.
-
-Instructions taken from
-https://bitbucket.org/heldercorreia/speedcrunch/wiki/BuildingOSXPackage
+Repository to build MacOS binaries from the official [SpeedCrunch repository](https://bitbucket.org/heldercorreia/speedcrunch).
 
 Please check the [Releases](https://github.com/tsengf/speedcrunch-nightlies/releases) to download the latest builds.
 
