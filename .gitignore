@@ -1,5 +1,2 @@
-build/*
-!build/README
-
-qt-static/*
-!qt-static/README
+build
+qt-static
