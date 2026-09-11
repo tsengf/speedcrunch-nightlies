@@ -20,7 +20,7 @@ Run configure with the following options.
 * Build static binaries to avoid runtime dependencies to Qt
 * Build only the submodules required by SpeedCrunch
 
-        ./configure -prefix -static ../qt-static -submodules qtbase,qttools,qtdeclarative
+        ./configure -prefix ../qt-static -static -submodules qtbase,qttools,qtdeclarative
 
 Qt is now configured for building. Build it.
 
