@@ -56,4 +56,4 @@ Install 'SpeedCrunch.dmg'.
 
 In a terminal, type
 
-        attr -c /Applications/SpeedCrunch.app
+        xattr -c /Applications/SpeedCrunch.app
