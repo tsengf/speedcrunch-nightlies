@@ -27,21 +27,21 @@ Run configure from the separate build directory with the following options:
 ../qt-everywhere-src-6.11.2/configure -prefix "$PWD/../qt-6.11.2-static" -static -submodules qtbase,qttools,qtdeclarative
 ```
 
-Build and install Qt from the same directory.
+Return to the repository root, then build and install Qt.
 
 ```sh
-cmake --build . --parallel
-cmake --install .
+cd ..
+cmake --build qt-build --parallel
+cmake --install qt-build
 ```
 
 Qt will be installed into `qt-6.11.2-static` in the repository root.
 
 ## SpeedCrunch
 
-Return to the repository root and clone the SpeedCrunch source.
+Clone the SpeedCrunch source from the repository root.
 
 ```sh
-cd ..
 git clone https://github.com/heldercorreia/speedcrunch.git
 ```
 
