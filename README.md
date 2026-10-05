@@ -1,54 +1,64 @@
 # speedcrunch-nightlies
-Repository to build MacOS binaries from the official [SpeedCrunch repository](https://bitbucket.org/heldercorreia/speedcrunch).
+Repository to build macOS binaries from the official [SpeedCrunch repository](https://github.com/heldercorreia/speedcrunch).
 
 Please check the [Releases](https://github.com/tsengf/speedcrunch-nightlies/releases) to download the latest builds.
 
 # Building
 
+Install Xcode with its command-line tools, CMake, Ninja, Git, and wget before building. Run the following commands from the root of this repository.
+
 ## Qt
-SpeedCrunch requires Qt. I am using version 6.11.2. For SpeedCrunch 0.12, I was able to get only version 6.7.3 to successfully build on the latest MacOS.
+SpeedCrunch requires Qt. These instructions use version 6.11.2 from [Qt Downloads](https://download.qt.io/official_releases/qt/).
 
-        wget https://download.qt.io/official_releases/qt/6.11/6.11.2/single/qt-everywhere-src-6.11.2.tar.xz
-        tar xf qt-everywhere-src-6.11.2.tar.xz
-        cd qt-everywhere-6.7.3
+```sh
+wget https://download.qt.io/official_releases/qt/6.11/6.11.2/single/qt-everywhere-src-6.11.2.tar.xz
+tar xf qt-everywhere-src-6.11.2.tar.xz
+mkdir qt-build
+cd qt-build
+```
 
-Run configure with the following options.
-* Specify the installation path 'speedcrunch-nightlies/qt-static'
-* Build static binaries to avoid runtime dependencies to Qt
+Run configure from the separate build directory with the following options:
+
+* Install Qt into `qt-6.11.2-static` in the repository root
+* Build static libraries to avoid runtime dependencies on Qt
 * Build only the submodules required by SpeedCrunch
 
-        ./configure -prefix ../qt-static -static -submodules qtbase,qttools,qtdeclarative
+```sh
+../qt-everywhere-src-6.11.2/configure -prefix "$PWD/../qt-6.11.2-static" -static -submodules qtbase,qttools,qtdeclarative
+```
 
-Qt is now configured for building. Build it.
+Build and install Qt from the same directory.
 
-        cmake --build .
+```sh
+cmake --build . --parallel
+cmake --install .
+```
 
-Install Qt to the installation path.
-
-        cmake --install .
-
-Qt will be installed into 'speedcrunch-nightlies/qt-static'
+Qt will be installed into `qt-6.11.2-static` in the repository root.
 
 ## SpeedCrunch
 
-Clone the SpeedCrunch source.
+Return to the repository root and clone the SpeedCrunch source.
 
-        cd ..
-        git clone git@bitbucket.org:heldercorreia/speedcrunch.git
+```sh
+cd ..
+git clone https://github.com/heldercorreia/speedcrunch.git
+```
 
-Build SpeedCrunch.
-* Point Cmake to Qt
+Configure CMake to use the installed Qt and build SpeedCrunch.
 
-        mkdir build
-        cd build
-        cmake -DCMAKE_PREFIX_PATH=`realpath ../qt-static/lib/cmake` ../speedcrunch/src
-        make
+```sh
+cmake -S speedcrunch/src -B build -DCMAKE_PREFIX_PATH="$PWD/qt-6.11.2-static"
+cmake --build build --parallel
+```
 
 Generate a SpeedCrunch package.
 
-        make package
+```sh
+cmake --build build --target package
+```
 
-Your package will be created as 'build/SpeedCrunch.dmg'.
+Your package will be created as `build/SpeedCrunch.dmg`.
 
 # Installation
 
