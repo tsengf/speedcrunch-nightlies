@@ -45,9 +45,10 @@ Clone the SpeedCrunch source from the repository root.
 git clone https://github.com/heldercorreia/speedcrunch.git
 ```
 
-Configure CMake to use the installed Qt and build SpeedCrunch.
+Create the build directory, configure CMake to use the installed Qt, and build SpeedCrunch.
 
 ```sh
+mkdir -p build
 cmake -S speedcrunch/src -B build -DCMAKE_PREFIX_PATH="$PWD/qt-6.11.2-static"
 cmake --build build --parallel
 ```
